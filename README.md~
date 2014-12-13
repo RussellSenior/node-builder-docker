@@ -1,0 +1,8 @@
+
+# ptp's openwrt build environment, dockerized
+
+with Russel's help I've managed to cobble together a working build setup
+
+
+     1. first install docker `curl https://get.docker.com/ | sh`
+     2. then run

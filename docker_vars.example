@@ -4,13 +4,5 @@ NAME="node-builder"
 HOST="${HOSTNAME}-${NAME}"
 VERSION="latest"
 
-# DOMAINS usually gets used in set_hipache.sh
-# but because DOMAIN sometimes ends up consumed by --env-file it can't be an array here
-# so we make a ':' delimited list here which gets parsed later (like PATH) with
-# IFS=':' read -ra ADDR <<< "$DOMAINS"
-DOMAINS=${NAME}.${WILDCARDDOMAIN}
-PORT=""
-
-
 # RUNARGS are just any extra arguments specific for this run
 RUNARGS=""
