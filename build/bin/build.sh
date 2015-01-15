@@ -57,6 +57,7 @@ function build_openwrt() {
 	if [ -e $DIR ]
 	then
 	    sudo chown -R ${OWUSER}:${OWUSER} $DIR	    
+	    sudo chmod -R 775 $DIR
 	fi
     done
 
