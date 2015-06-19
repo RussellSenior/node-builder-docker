@@ -8,15 +8,9 @@ MAINTAINER ptp@bnf.net
 ENV IMAGE personaltelco/node-builder
 # ENV BUILDATE
 
-RUN apt-get update &&\
-    apt-get install -y git-core subversion build-essential gcc-multilib \
-    libncurses5-dev zlib1g-dev gawk flex gettext wget unzip python libssl-dev openssl \
-    cpanminus libnet-ssleay-perl libcrypt-ssleay-perl &&\
-    apt-get clean
-
-RUN cpanm --skip-satisfied NetAddr::IP::Lite Getopt::Long LWP::Simple JSON LWP::Protocol::https 
-
 ADD ./bin /opt/bin
+
+RUN /opt/bin/system.sh
 
 ENV OWUSER openwrt
 RUN useradd -m ${OWUSER} &&\
