@@ -54,11 +54,11 @@ function build_openwrt() {
     # set proper permissions for docker volumes
     for DIR in bin build_dir dl
     do
-	if [ -e $DIR ]
-	then
-	    sudo chown -R ${OWUSER}:${OWUSER} $DIR	    
-	    sudo chmod -R 775 $DIR
-	fi
+        if [ -e $DIR ]
+        then
+            sudo chown -R ${OWUSER}:${OWUSER} $DIR
+            sudo chmod -R 775 $DIR
+        fi
     done
 
     # copy architectur config
@@ -70,15 +70,13 @@ function build_openwrt() {
     # config and build
     make defconfig
     time make BUILD_LOG=1 IGNORE_ERRORS=m V=99 -j17
-    
+
     # look for build errors
-    for i in $(find logs -name compile.txt) ; 
-    do 
-	grep -H --label=$i 'Error ' $i grep -v ignored | awk -F: '{ print $1 }'; 
+    for i in $(find logs -name compile.txt) ;
+    do
+        grep -H --label=$i 'Error ' $i grep -v ignored | awk -F: '{ print $1 }';
     done
 }
 
 foocab
 build_openwrt
-
-
