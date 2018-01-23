@@ -2,10 +2,9 @@
 # https://personaltelco.net/wiki/FooCabFirmwareHowTo
 
 FROM debian:stable
-MAINTAINER ptp@bnf.net
+MAINTAINER ptp-ops@googlegroups.com
 
 ENV IMAGE personaltelco/node-builder
-# ENV BUILDATE
 
 # Install Debian main packages
 RUN apt-get update -qq \
@@ -16,8 +15,8 @@ RUN apt-get update -qq \
   && apt-get clean
 
 # Install modules from CPAN
-RUN cpanm --skip-satisfied NetAddr::IP::Lite Getopt::Long JSON
-RUN cpanm --skip-satisfied LWP::Simple LWP::Protocol::https
+RUN cpanm --skip-satisfied \
+  NetAddr::IP::Lite Getopt::Long JSON LWP::Simple LWP::Protocol::https
 
 # Fetch source trees
 WORKDIR /src
