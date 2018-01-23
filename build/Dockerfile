@@ -1,36 +1,36 @@
 # dependencies and scripts to run
 # https://personaltelco.net/wiki/FooCabFirmwareHowTo
 
-FROM ubuntu:14.04
-
+FROM debian:stable
 MAINTAINER ptp@bnf.net
 
 ENV IMAGE personaltelco/node-builder
 # ENV BUILDATE
 
-ADD ./bin /opt/bin
+# Install Debian main packages
+RUN apt-get update -qq \
+  && apt-get install -y --no-install-recommends \
+    build-essential ca-certificates cpanminus file flex gawk gcc-multilib git \
+    libncurses5-dev libnet-ssleay-perl libcrypt-ssleay-perl libssl-dev \
+    openssl python rsync subversion unzip wget zlib1g-dev \
+  && apt-get clean
 
-RUN /opt/bin/system.sh
+# Install modules from CPAN
+RUN cpanm --skip-satisfied NetAddr::IP::Lite Getopt::Long JSON
+RUN cpanm --skip-satisfied LWP::Simple LWP::Protocol::https
 
-ENV OWUSER openwrt
-RUN useradd -m ${OWUSER} &&\
-    echo "${OWUSER} ALL=NOPASSWD: ALL" > /etc/sudoers.d/${OWUSER}
+# Fetch source trees
+WORKDIR /src
+RUN git clone git://github.com/personaltelco/ptp-openwrt-files.git
+RUN git clone git://git.lede-project.org/source.git lede
 
-# this is a russelism
-RUN ln -s /home/${OWUSER} /src_archive
-
-USER ${OWUSER}
-WORKDIR /home/${OWUSER}
-RUN git clone -b static-splash git://github.com/bnfinet/ptp-openwrt-files.git
-RUN git clone git://git.openwrt.org/openwrt.git
-
-WORKDIR /home/${OWUSER}/openwrt
-RUN scripts/feeds update
-ADD config/openwrt/feeds.conf /home/${OWUSER}/openwrt/feeds.conf
+# Update and install LEDE package feeds
+WORKDIR /src/lede
+ADD config/openwrt/feeds.conf feeds.conf
 RUN scripts/feeds update -a
 RUN scripts/feeds install -a
 
-WORKDIR /home/${OWUSER}
-
-USER ${OWUSER}
+# Ready to build
+WORKDIR /src
+ADD ./bin /opt/bin
 ENTRYPOINT ["/opt/bin/build.sh"]
