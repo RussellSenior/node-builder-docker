@@ -1,16 +1,3 @@
-Update 2018/01:
-
-Made some updates here while getting back up to speed with node builds, so this
-should once again work with current versions of things for now. Further
-development will continue here:
-
-https://github.com/keeganquinn/ptpwrt-builder
-
- - KeeganQuinn
-
-
-Original documentation:
-
 # ptp's openwrt build environment, dockerized
 
 with Russell's help I've managed to cobble together a working build setup
