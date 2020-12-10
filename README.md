@@ -13,7 +13,7 @@ Original documentation:
 
 # ptp's openwrt build environment, dockerized
 
-with Russel's help I've managed to cobble together a working build setup
+with Russell's help I've managed to cobble together a working build setup
 his instructions can be found at https://personaltelco.net/wiki/FooCabFirmwareHowTo
 
  0. clone this repo locally
