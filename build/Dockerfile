@@ -21,10 +21,10 @@ RUN cpanm --skip-satisfied \
 # Fetch source trees
 WORKDIR /src
 RUN git clone git://github.com/personaltelco/ptp-openwrt-files.git
-RUN git clone git://git.lede-project.org/source.git lede
+RUN git clone git://git.openwrt.org/openwrt/openwrt.git
 
-# Update and install LEDE package feeds
-WORKDIR /src/lede
+# Update and install OpenWrt package feeds
+WORKDIR /src/openwrt
 ADD config/openwrt/feeds.conf feeds.conf
 RUN scripts/feeds update -a
 RUN scripts/feeds install -a

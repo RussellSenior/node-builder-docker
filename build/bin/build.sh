@@ -35,10 +35,10 @@ set -e -x
 cd /src/ptp-openwrt-files || exit 2
 
 perl FOOCAB.pl --node "$NODE"
-mv output /src/lede/files
+mv output /src/openwrt/files
 
 
-cd /src/lede || exit 2
+cd /src/openwrt || exit 2
 
 # copy device config; make sure dowload directory stays here
 sed 's/CONFIG_DOWNLOAD_FOLDER/#CONFIG_DOWNLOAD_FOLDER/g' \
