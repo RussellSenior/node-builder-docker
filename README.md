@@ -1,19 +1,6 @@
-Update 2018/01:
-
-Made some updates here while getting back up to speed with node builds, so this
-should once again work with current versions of things for now. Further
-development will continue here:
-
-https://github.com/keeganquinn/ptpwrt-builder
-
- - KeeganQuinn
-
-
-Original documentation:
-
 # ptp's openwrt build environment, dockerized
 
-with Russel's help I've managed to cobble together a working build setup
+with Russell's help I've managed to cobble together a working build setup
 his instructions can be found at https://personaltelco.net/wiki/FooCabFirmwareHowTo
 
  0. clone this repo locally
