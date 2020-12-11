@@ -5,18 +5,18 @@ function usage() {
 
     usage:
 
-        docker run -it ${IMAGE} architecture nodename
+        docker run -it ${IMAGE} device nodename
 
         this setup assumes you have a node registered with the ptp-api
 
         if not, enter one here:
         https://personaltelco.net/datamanager
 
-        for a list of architectures see:
+        for a list of devices see:
         https://github.com/personaltelco/ptp-cab/tree/master/ptp-node/files
 
-        ex: if your architecture is atheros
-        docker run -it ${IMAGE} atheros nodename
+        ex: if your device is a TPLink TL-WDR3600:
+        docker run -it ${IMAGE} WDR3600 nodename
 
 EOF
 
@@ -26,7 +26,7 @@ EOF
 [ -z "$1" ] && usage
 
 
-ARCH=$1
+DEVICE=$1
 NODE=$2
 
 set -e -x
@@ -40,9 +40,9 @@ mv output /src/lede/files
 
 cd /src/lede || exit 2
 
-# copy architecture config; make sure dowload directory stays here
+# copy device config; make sure dowload directory stays here
 sed 's/CONFIG_DOWNLOAD_FOLDER/#CONFIG_DOWNLOAD_FOLDER/g' \
-    "feeds/ptpcab/ptp-node/files/.config-${ARCH}" > .config
+    "feeds/ptpcab/ptp-node/files/.config-${DEVICE}" > .config
 
 # config and build
 make defconfig
